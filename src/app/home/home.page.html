@@ -1,20 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+<ion-toolbar color="primary">
+<ion-title>
+UniConecta
+</ion-title>
+</ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<div *ngIf="isOnline"
+style="background-color:#d4edda;
+color:#155724;
+padding:15px;
+border-radius:8px;
+margin-bottom:15px;">
+
+🟢 UniConecta Online
+
+</div>
+
+<div *ngIf="!isOnline"
+style="background-color:#f8d7da;
+color:#721c24;
+padding:15px;
+border-radius:8px;
+margin-bottom:15px;">
+
+🔴 UniConecta en modo Offline
+
+</div>
+
+<h2>Proyecto UniConecta</h2>
+
+<p>
+Aplicación para la gestión de grupos de estudio universitarios.
+</p>
+
 </ion-content>
