@@ -1,43 +1,63 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
- 
 import {
-IonHeader,
-IonToolbar,
-IonTitle,
-IonContent
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonCard,
+  IonCardContent,
+  IonBadge
 } from '@ionic/angular';
 
 import { NetworkService } from '../services/network.service';
 
 @Component({
-selector: 'app-home',
-templateUrl: 'home.page.html',
-styleUrls: ['home.page.scss'],
-standalone: true,
-imports: [
-CommonModule,
-IonHeader,
-IonToolbar,
-IonTitle,
-IonContent
-]
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonCard,
+    IonCardContent,
+    IonBadge
+  ]
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-isOnline = true;
+  isOnline = navigator.onLine;
 
-constructor(
-private networkService: NetworkService
-) {
+  constructor(
+    private networkService: NetworkService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-this.networkService
-.getConnectionStatus()
-.subscribe(status => {
+  ngOnInit() {
+    // Escuchar el servicio
+    this.networkService.getConnectionStatus().subscribe(status => {
+      this.isOnline = status;
+      this.cdr.detectChanges(); // Forzar renderizado en pantalla
+    });
 
-this.isOnline = status;
+    // Eventos directos del navegador como respaldo
+    window.addEventListener('online', () => {
+      this.isOnline = true;
+      this.cdr.detectChanges();
+    });
 
-});
+    window.addEventListener('offline', () => {
+      this.isOnline = false;
+      this.cdr.detectChanges();
+    });
+  }
 
-}
+  toggleConnection() {
+    this.isOnline = !this.isOnline;
+    this.cdr.detectChanges();
+  }
 }

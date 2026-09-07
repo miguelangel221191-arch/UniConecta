@@ -1,39 +1,26 @@
-<ion-header>
-<ion-toolbar color="primary">
-<ion-title>
-UniConecta
-</ion-title>
-</ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      UniConecta - Detector de Red
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-<div *ngIf="isOnline"
-style="background-color:#d4edda;
-color:#155724;
-padding:15px;
-border-radius:8px;
-margin-bottom:15px;">
-
-🟢 UniConecta Online
-
-</div>
-
-<div *ngIf="!isOnline"
-style="background-color:#f8d7da;
-color:#721c24;
-padding:15px;
-border-radius:8px;
-margin-bottom:15px;">
-
-🔴 UniConecta en modo Offline
-
-</div>
-
-<h2>Proyecto UniConecta</h2>
-
-<p>
-Aplicación para la gestión de grupos de estudio universitarios.
-</p>
+  <!-- Banner / Tarjeta del Estado de Red -->
+  <ion-card [color]="isOnline ? 'success' : 'danger'">
+    <ion-card-content class="ion-text-center">
+      <h2>
+        Estado de la Conexión:
+        <ion-badge [color]="isOnline ? 'light' : 'dark'">
+          {{ isOnline ? 'ONLINE' : 'OFFLINE' }}
+        </ion-badge>
+      </h2>
+      <p>
+        {{ isOnline ? 'Conectado a Internet activamente.' : 'Sin conexión a Internet. Operando en modo Offline.' }}
+      </p>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
