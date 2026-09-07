@@ -1,42 +1,45 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, NgZone } from '@angular/core';
 import { Network } from '@capacitor/network';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root'
 })
 export class NetworkService {
 
-private onlineStatus = new BehaviorSubject<boolean>(true);
+  private status$ = new BehaviorSubject<boolean>(navigator.onLine);
 
-constructor() {
-this.initializeNetwork();
-}
+  constructor(private zone: NgZone) {
+    this.initNetworkMonitoring();
+  }
 
-async initializeNetwork() {
+  private async initNetworkMonitoring() {
+    // 1. Estado inicial
+    const status = await Network.getStatus();
+    this.updateStatus(status.connected && navigator.onLine);
 
-const status = await Network.getStatus();
+    // 2. Escuchar Capacitor (Dispositivos móviles)
+    Network.addListener('networkStatusChange', (status) => {
+      this.updateStatus(status.connected);
+    });
 
-this.onlineStatus.next(status.connected);
+    // 3. Escuchar eventos directos del navegador / SO
+    window.addEventListener('online', () => this.updateStatus(true));
+    window.addEventListener('offline', () => this.updateStatus(false));
+  }
 
-Network.addListener(
-'networkStatusChange',
-(status) => {
+  // Método manual para cambiar el estado desde la UI si se desea probar
+  public setOfflineManual(isOnline: boolean) {
+    this.updateStatus(isOnline);
+  }
 
-console.log(
-'Estado de red:',
-status.connected
-);
+  private updateStatus(connected: boolean) {
+    this.zone.run(() => {
+      this.status$.next(connected);
+    });
+  }
 
-this.onlineStatus.next(
-status.connected
-);
-
-}
-);
-}
-
-getConnectionStatus() {
-return this.onlineStatus.asObservable();
-}
+  getConnectionStatus(): Observable<boolean> {
+    return this.status$.asObservable();
+  }
 }
