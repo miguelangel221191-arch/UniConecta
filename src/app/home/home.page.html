@@ -1,26 +1,39 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>
-      UniConecta - Detector de Red
-    </ion-title>
-  </ion-toolbar>
+<ion-toolbar color="primary">
+<ion-title>
+UniConecta - Detector de Red
+</ion-title>
+</ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
-
-  <!-- Banner / Tarjeta del Estado de Red -->
-  <ion-card [color]="isOnline ? 'success' : 'danger'">
-    <ion-card-content class="ion-text-center">
-      <h2>
-        Estado de la Conexión:
-        <ion-badge [color]="isOnline ? 'light' : 'dark'">
-          {{ isOnline ? 'ONLINE' : 'OFFLINE' }}
-        </ion-badge>
-      </h2>
-      <p>
-        {{ isOnline ? 'Conectado a Internet activamente.' : 'Sin conexión a Internet. Operando en modo Offline.' }}
-      </p>
-    </ion-card-content>
-  </ion-card>
-
+<!-- Banner / Tarjeta del Estado de Red -->
+<ion-card [color]="isOnline ? 'success' : 'danger'">
+<ion-card-content class="ion-text-center">
+<h2>
+Estado de la Conexión:
+<ion-badge [color]="isOnline ? 'light' : 'dark'">
+{{ isOnline ? 'ONLINE' : 'OFFLINE' }}
+</ion-badge>
+</h2>
+<p>
+{{ isOnline
+? 'Conectado a Internet activamente.'
+: 'Sin conexión a Internet. Operando en modo Offline.' }}
+</p>
+</ion-card-content>
+</ion-card>
+<ion-item>
+<ion-label position="stacked">
+Nombre
+</ion-label>
+<ion-input
+[(ngModel)]="nombre"
+placeholder="Digite un nombre">
+</ion-input>
+</ion-item>
+<ion-button
+expand="block"
+(click)="guardarRegistro()">
+Guardar Registro
+</ion-button>
 </ion-content>
