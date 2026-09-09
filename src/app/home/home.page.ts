@@ -46,14 +46,24 @@ private offlineService: OfflineService,
 private cdr: ChangeDetectorRef
 ) {}
 ngOnInit() {
-this.networkService.getConnectionStatus().subscribe(status => {
+// Estado de conexión desde el servicio
+this.networkService
+.getConnectionStatus()
+.subscribe(status => {
 this.isOnline = status;
 this.cdr.detectChanges();
 });
-window.addEventListener('online', () => {
+// Cuando vuelve Internet
+window.addEventListener('online', async () => {
 this.isOnline = true;
+await this.offlineService
+.sincronizarDatos();
+alert(
+'Conexión recuperada. Datos sincronizados correctamente.'
+);
 this.cdr.detectChanges();
 });
+// Cuando se pierde Internet
 window.addEventListener('offline', () => {
 this.isOnline = false;
 this.cdr.detectChanges();
@@ -67,17 +77,26 @@ async guardarRegistro() {
 if (!this.nombre) {
 alert('Ingrese un nombre');
 return;
+108
 }
 const dato = {
 nombre: this.nombre,
 fecha: new Date()
 };
 if (this.isOnline) {
-console.log('Dato enviado al servidor', dato);
-alert('Dato enviado al servidor');
+console.log(
+'Dato enviado al servidor',
+dato
+);
+alert(
+'Dato enviado al servidor'
+);
 } else {
-await this.offlineService.guardarDato(dato);
-alert('Sin conexión. Dato guardado localmente.');
+await this.offlineService
+.guardarDato(dato);
+alert(
+'Sin conexión. Dato guardado localmente.'
+);
 }
 this.nombre = '';
 }

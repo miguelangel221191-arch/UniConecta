@@ -1,7 +1,5 @@
-
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-
 @Injectable({
 providedIn: 'root'
 })
@@ -14,8 +12,7 @@ async init() {
 await this.storage.create();
 }
 async guardarDato(dato: any) {
-let datos =
-await this.storage.get(this.STORAGE_KEY);
+let datos = await this.storage.get(this.STORAGE_KEY);
 if (!datos) {
 datos = [];
 }
@@ -35,6 +32,25 @@ async limpiarDatos() {
 await this.storage.set(
 this.STORAGE_KEY,
 []
+);
+}
+async sincronizarDatos() {
+const datosPendientes =
+await this.obtenerDatos();
+if (datosPendientes.length === 0) {
+return;
+}
+for (const dato of datosPendientes) {
+console.log(
+'Sincronizando dato:',
+dato
+);
+// Aquí normalmente se enviaría al servidor
+// mediante HttpClient.post(...)
+}
+await this.limpiarDatos();
+console.log(
+'Sincronización completada'
 );
 }
 }
