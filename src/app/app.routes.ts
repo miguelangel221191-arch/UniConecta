@@ -10,4 +10,8 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'bluetooth',
+    loadComponent: () => import('./bluetooth/bluetooth.page').then( m => m.BluetoothPage)
+  },
 ];
