@@ -1,0 +1,31 @@
+<ion-header>
+<ion-toolbar color="warning">
+<ion-title>
+Calendario
+</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<h2>Próximas Sesiones</h2>
+
+<ion-card *ngFor="let reunion of reuniones">
+
+<ion-card-header>
+
+<ion-card-title>
+{{ reunion.fecha }}
+</ion-card-title>
+
+</ion-card-header>
+
+<ion-card-content>
+
+{{ reunion.materia }}
+
+</ion-card-content>
+
+</ion-card>
+
+</ion-content>

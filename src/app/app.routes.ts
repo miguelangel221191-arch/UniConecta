@@ -6,9 +6,11 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
   {
+    
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
+redirectTo: 'login',
+pathMatch: 'full',
+
   },
   {
     path: 'bluetooth',
@@ -21,5 +23,29 @@ export const routes: Routes = [
   {
     path: 'wifi',
     loadComponent: () => import('./wifi/wifi.page').then( m => m.WifiPage)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./dashboard/dashboard.page').then( m => m.DashboardPage)
+  },
+  {
+    path: 'grupos',
+    loadComponent: () => import('./grupos/grupos.page').then( m => m.GruposPage)
+  },
+  {
+    path: 'chat',
+    loadComponent: () => import('./chat/chat.page').then( m => m.ChatPage)
+  },
+  {
+    path: 'calendario',
+    loadComponent: () => import('./calendario/calendario.page').then( m => m.CalendarioPage)
+  },
+  {
+    path: 'perfil',
+    loadComponent: () => import('./perfil/perfil.page').then( m => m.PerfilPage)
   },
 ];

@@ -1,0 +1,46 @@
+<ion-header>
+<ion-toolbar color="success">
+<ion-title>
+Chat Grupal
+</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<h2>Programación de Dispositivos Móviles</h2>
+
+<div *ngFor="let m of mensajes">
+
+<ion-item>
+<strong>{{ m.usuario }}:</strong>
+&nbsp;
+{{ m.texto }}
+</ion-item>
+
+</div>
+
+<br>
+
+<ion-item>
+
+<ion-input
+placeholder="Escribe un mensaje..."
+[(ngModel)]="mensaje">
+
+</ion-input>
+
+</ion-item>
+
+<br>
+
+<ion-button
+expand="block"
+color="success"
+(click)="enviarMensaje()">
+
+Enviar
+
+</ion-button>
+
+</ion-content>
