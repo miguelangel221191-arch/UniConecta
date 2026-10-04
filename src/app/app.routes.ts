@@ -48,4 +48,13 @@ pathMatch: 'full',
     path: 'perfil',
     loadComponent: () => import('./perfil/perfil.page').then( m => m.PerfilPage)
   },
+  {
+path: 'gps',
+loadComponent: () => import('./gps/gps.page').then( m => m.GpsPage)
+},
+  {
+    path: 'lugares',
+    loadComponent: () => import('./lugares/lugares.page').then( m => m.LugaresPage)
+  }
+
 ];

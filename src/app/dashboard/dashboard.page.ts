@@ -62,4 +62,12 @@ irNfc() {
 this.router.navigate(['/nfc']);
 }
 
+irGps() {
+this.router.navigate(['/gps']);
+}
+
+irLugares() {
+  this.router.navigate(['/lugares']);
+}
+
 }

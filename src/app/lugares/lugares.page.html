@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Buscar Lugares
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-button
+    expand="block"
+    color="success"
+    (click)="buscarLugar('farmacia')">
+
+    Buscar Farmacias
+
+  </ion-button>
+
+  <ion-button
+    expand="block"
+    color="danger"
+    (click)="buscarLugar('hospital')">
+
+    Buscar Hospitales
+
+  </ion-button>
+
+  <ion-button
+    expand="block"
+    color="warning"
+    (click)="buscarLugar('restaurante')">
+
+    Buscar Restaurantes
+
+  </ion-button>
+
+  <ion-list>
+
+    <ion-item *ngFor="let lugar of lugares">
+
+      <ion-label>
+
+        {{ lugar }}
+
+      </ion-label>
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
