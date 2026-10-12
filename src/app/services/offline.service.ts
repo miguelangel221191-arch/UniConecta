@@ -45,8 +45,7 @@ console.log(
 'Sincronizando dato:',
 dato
 );
-// Aquí normalmente se enviaría al servidor
-// mediante HttpClient.post(...)
+
 }
 await this.limpiarDatos();
 console.log(

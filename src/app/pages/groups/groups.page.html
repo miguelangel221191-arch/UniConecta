@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Gestión de Grupos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
+
+  <div style="margin-top: 10px; margin-bottom: 20px;">
+    <h2>Mis Grupos de Estudio</h2>
+    <p style="color: #aaa;">Desliza un grupo hacia la izquierda para eliminarlo o usa el botón</p>
+  </div>
+
+  <!-- Formulario para Crear Grupo -->
+  <ion-card style="background: #1e1e1e; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+    <h3 style="color: #3880ff; margin-bottom: 15px;">Crear Nuevo Grupo</h3>
+    
+    <ion-item style="--background: #2a2a2a; color: white; margin-bottom: 10px; border-radius: 6px;">
+      <ion-input label="Nombre del Grupo" labelPlacement="stacked" [(ngModel)]="nuevoNombre" placeholder="Ej: Los Programadores"></ion-input>
+    </ion-item>
+
+    <ion-item style="--background: #2a2a2a; color: white; margin-bottom: 15px; border-radius: 6px;">
+      <ion-input label="Materia / Asignatura" labelPlacement="stacked" [(ngModel)]="nuevaMateria" placeholder="Ej: ISW-307"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" color="success" (click)="agregarGrupo()">
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      Guardar Grupo
+    </ion-button>
+  </ion-card>
+
+  <!-- Lista de Grupos Activos -->
+  <h3 style="margin-top: 20px;">Grupos Activos</h3>
+  
+  <div *ngIf="grupos.length === 0" style="text-align: center; color: #777; margin-top: 30px;">
+    <p>No hay grupos registrados.</p>
+  </div>
+
+  <ion-list style="background: transparent; margin-top: 10px;">
+    <ion-item-sliding *ngFor="let grupo of grupos" style="margin-bottom: 12px; border-radius: 8px; overflow: hidden;">
+      
+      <ion-item style="--background: #1e1e1e; color: white; --padding-start: 15px;">
+        <ion-label>
+          <h2 style="color: #ffffff; font-weight: bold; font-size: 16px;">{{ grupo.nombre }}</h2>
+          <p style="color: #3880ff; font-size: 14px;">{{ grupo.materia }}</p>
+        </ion-label>
+        
+        <ion-button slot="end" fill="solid" color="danger" (click)="eliminarGrupo(grupo.id)">
+          <ion-icon name="trash-outline" slot="start" style="font-size: 18px;"></ion-icon>
+          Eliminar
+        </ion-button>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="eliminarGrupo(grupo.id)">
+          <ion-icon name="trash" slot="start" style="font-size: 18px;"></ion-icon>
+          Borrar
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

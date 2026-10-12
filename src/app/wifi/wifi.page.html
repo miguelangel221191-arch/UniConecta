@@ -1,27 +1,29 @@
-
-<ion-header>
-<ion-toolbar color="success">
-<ion-title>WiFi UniConecta</ion-title>
-</ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Estado de Red y WiFi</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
 
-<ion-card>
-<ion-card-header>
-<ion-card-title>Estado de WiFi</ion-card-title>
-</ion-card-header>
+  <div style="text-align: center; margin-top: 20px;">
+    <h2>Información de Conectividad</h2>
+    <p style="color: #aaa;">Monitoreo avanzado de interfaz de red</p>
+  </div>
 
-<ion-card-content>
-{{ estado }}
-</ion-card-content>
-</ion-card>
+  <ion-card style="background: #1e1e1e; color: white; margin-top: 30px; padding: 20px; text-align: center;">
+    <ion-icon [name]="tipoConexion === 'wifi' ? 'wifi-outline' : 'cellular-outline'" style="font-size: 50px; color: #3880ff; margin-bottom: 15px;"></ion-icon>
+    
+    <div style="margin-bottom: 15px;">
+      <p style="font-size: 16px; margin: 5px 0;"><strong>Estado:</strong> 
+        <span [style.color]="isOnline ? '#2dd36f' : '#eb445a'">{{ isOnline ? 'Conectado' : 'Desconectado' }}</span>
+      </p>
+      <p style="font-size: 16px; margin: 5px 0;"><strong>Tipo de Red:</strong> <span style="text-transform: uppercase; color: #3880ff;">{{ tipoConexion }}</span></p>
+    </div>
 
-<ion-button
-expand="block"
-color="success"
-(click)="verificarWifi()">
-VERIFICAR WIFI
-</ion-button>
+    <ion-button expand="block" color="primary" (click)="verificarEstadoRed()" style="margin-top: 20px;">
+      Actualizar Estado de Red
+    </ion-button>
+  </ion-card>
 
 </ion-content>

@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="--background: #1e1e1e; --color: white;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="Atrás" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color: white;">Podcasts Educativos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
+
+  <div style="margin-top: 10px; margin-bottom: 20px;">
+    <h2>Reproductor Multimedia</h2>
+    <p style="color: #aaa;">Escucha el material académico de tus asignaturas en audio.</p>
+  </div>
+
+  <!-- Tarjeta del Reproductor Activo -->
+  <ion-card style="background: #1e1e1e; color: white; border-radius: 12px; padding: 10px; margin-bottom: 25px;">
+    <ion-card-header style="text-align: center;">
+      <ion-icon name="musical-notes" style="font-size: 50px; color: #3880ff; margin-bottom: 10px;"></ion-icon>
+      <ion-card-title style="color: #ffffff; font-size: 18px; font-weight: bold;">
+        {{ podcastActual?.titulo || 'Selecciona un episodio' }}
+      </ion-card-title>
+      <p style="color: #aaa; margin-top: 5px; font-size: 14px;">
+        {{ podcastActual?.autor }}
+      </p>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Barra de Progreso ion-range -->
+      <ion-range 
+        [min]="0" 
+        [max]="duracionTotal" 
+        [value]="tiempoActual" 
+        (ionChange)="cambiarProgreso($event)"
+        style="--bar-background: #333; --bar-background-active: #3880ff; --knob-background: #3880ff;">
+      </ion-range>
+
+      <!-- Tiempo Transcurrido y Duración -->
+      <div style="display: flex; justify-content: space-between; color: #aaa; font-size: 13px; margin-top: -5px; margin-bottom: 15px;">
+        <span>{{ formatearTiempo(tiempoActual) }}</span>
+        <span>{{ formatearTiempo(duracionTotal) }}</span>
+      </div>
+
+      <!-- Controles del Reproductor -->
+      <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+        <ion-button color="danger" fill="clear" size="large" (click)="detenerAudio()">
+          <ion-icon name="square"></ion-icon>
+        </ion-button>
+
+        <ion-button color="primary" shape="round" style="--padding-start: 20px; --padding-end: 20px;" (click)="reproducirOPausar()">
+          <ion-icon [name]="estaReproduciendo ? 'pause' : 'play'" style="font-size: 26px;"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de Episodios Disponibles -->
+  <h3 style="color: white; margin-bottom: 10px;">Episodios Disponibles</h3>
+
+  <ion-list style="background: transparent;">
+    <ion-item 
+      *ngFor="let item of listaPodcasts" 
+      (click)="seleccionarPodcast(item)"
+      button
+      style="--background: #1e1e1e; --color: white; margin-bottom: 10px; --border-radius: 8px;">
+      <ion-icon name="musical-notes" slot="start" [style.color]="podcastActual?.id === item.id ? '#3880ff' : '#aaa'"></ion-icon>
+      <ion-label>
+        <h2 style="color: white; font-weight: bold;">{{ item.titulo }}</h2>
+        <p style="color: #aaa;">{{ item.autor }}</p>
+      </ion-label>
+      <span slot="end" style="color: #888; font-size: 13px;">{{ item.duracionEstimada }}</span>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="Atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Noticias Académicas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="Desliza para actualizar..." refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div style="margin-top: 10px; margin-bottom: 20px;">
+    <h2>Últimas Novedades UAPA</h2>
+    <p style="color: #aaa;">Información oficial obtenida en tiempo real vía API REST</p>
+  </div>
+
+  <div *ngIf="cargando" style="text-align: center; margin-top: 50px;">
+    <ion-spinner name="crescent" style="width: 50px; height: 50px; color: #3880ff;"></ion-spinner>
+    <p style="color: #aaa; margin-top: 10px;">Cargando publicaciones...</p>
+  </div>
+
+  <div *ngIf="errorMensaje" style="text-align: center; margin-top: 40px; padding: 20px; background: #1e1e1e; border-radius: 10px;">
+    <p style="color: #ef4444;">{{ errorMensaje }}</p>
+    <ion-button color="primary" size="small" (click)="cargarNoticias()">Reintentar</ion-button>
+  </div>
+
+  <div *ngIf="!cargando && !errorMensaje">
+    <ion-card *ngFor="let item of noticias" style="background: #1e1e1e; color: white; margin-bottom: 15px; border-radius: 10px; padding: 5px;">
+      <ion-card-header>
+        <ion-card-title style="color: #ffffff; font-size: 17px; font-weight: bold;">
+          {{ item.title | titlecase }}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content style="color: #bbb; font-size: 14px;">
+        {{ item.body }}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

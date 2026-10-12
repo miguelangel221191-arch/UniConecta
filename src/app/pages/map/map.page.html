@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Geolocalización y Mapa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
+
+  <div style="text-align: center; margin-top: 10px;">
+    <h2>Ubicación Actual</h2>
+    <p style="color: #aaa;">Monitoreo GPS y Mapa Interactivo</p>
+  </div>
+
+  <!-- Tarjeta de Coordenadas -->
+  <ion-card style="background: #1e1e1e; color: white; margin-top: 15px; padding: 15px; text-align: center;">
+    <ion-icon name="location-outline" style="font-size: 40px; color: #3880ff; margin-bottom: 5px;"></ion-icon>
+    
+    <div *ngIf="latitud; else cargando">
+      <p style="margin: 5px 0;"><strong>Latitud:</strong> {{ latitud }}</p>
+      <p style="margin: 5px 0;"><strong>Longitud:</strong> {{ longitud }}</p>
+    </div>
+
+    <ng-template #cargando>
+      <p style="color: #aaa;">Obteniendo coordenadas GPS...</p>
+    </ng-template>
+
+    <ion-button expand="block" color="primary" (click)="obtenerUbicacion()" style="margin-top: 15px;">
+      Actualizar Ubicación GPS
+    </ion-button>
+  </ion-card>
+
+  <!-- Contenedor del Mapa Visual con Acceso -->
+  <ion-card style="background: #1e1e1e; margin-top: 15px; padding: 10px; border-radius: 8px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 5px;">
+      <span style="font-size: 14px; color: #aaa;">Vista previa de zona GPS</span>
+      <ion-button size="small" fill="outline" color="light" (click)="abrirMapaCompleto()">
+        <ion-icon name="open-outline" slot="start"></ion-icon>
+        Abrir Mapa Completo
+      </ion-button>
+    </div>
+
+    <div style="height: 250px; overflow: hidden; border-radius: 6px;">
+      <iframe 
+        *ngIf="mapUrl" 
+        [src]="mapUrl" 
+        width="100%" 
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </ion-card>
+
+</ion-content>

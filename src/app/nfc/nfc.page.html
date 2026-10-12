@@ -1,28 +1,32 @@
-<ion-header>
-<ion-toolbar color="warning">
-<ion-title>NFC UniConecta</ion-title>
-</ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Carnet Digital NFC</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
 
-<ion-card>
-<ion-card-header>
-<ion-card-title>Tecnología NFC</ion-card-title>
-</ion-card-header>
+  <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+    <h2>Control de Acceso UAPA</h2>
+    <p style="color: #aaa;">Acerca tu dispositivo al lector o simula la lectura</p>
+  </div>
 
-<ion-card-content>
-Permite identificar usuarios mediante proximidad.
-</ion-card-content>
-</ion-card>
+  <div style="max-width: 500px; margin: 0 auto; background: #1e1e1e; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); text-align: center;">
+    
+    <!-- Nombre dinámico del usuario actual -->
+    <h3 style="margin: 15px 0; color: white;">{{ nombreUsuario }}</h3>
+    <p style="color: #3880ff; margin: 0;">Ingeniería de Software</p>
+    <p style="color: #888; font-size: 14px; margin-top: 5px;">Correo: {{ correoUsuario }}</p>
 
-<ion-button
-expand="block"
-color="warning"
-(click)="activarNFC()">
+    <div style="background: #2a2a2a; padding: 12px; border-radius: 8px; color: #2dd36f; margin: 25px 0; font-weight: bold;">
+      Estado del Escáner:<br>
+      {{ mensajeEscaneo }}
+    </div>
 
-ACTIVAR NFC
+    <ion-button expand="block" color="primary" (click)="escanearNfc()" style="height: 48px; font-weight: bold;">
+      ESCANEAR CARNET NFC
+    </ion-button>
 
-</ion-button>
+  </div>
 
 </ion-content>

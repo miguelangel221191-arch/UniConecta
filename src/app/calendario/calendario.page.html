@@ -1,31 +1,49 @@
-<ion-header>
-<ion-toolbar color="warning">
-<ion-title>
-Calendario
-</ion-title>
-</ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-title style="color: #000; font-weight: bold;">Calendario Académico</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
 
-<h2>Próximas Sesiones</h2>
+  <div style="max-width: 600px; margin: 0 auto; padding-top: 10px;">
+    
+    <!-- Formulario para agregar nueva clase/sesión -->
+    <div style="background: #1e1e1e; padding: 20px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+      <h3 style="margin-top: 0; color: #ffc409; font-size: 18px;">Agendar Nueva Clase o Sesión</h3>
+      
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 14px; color: #aaa; display: block; margin-bottom: 5px;">Fecha o Día:</label>
+        <input type="text" [(ngModel)]="nuevaFecha" placeholder="Ej: 25 Octubre" style="width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #444; color: white; border-radius: 6px;">
+      </div>
 
-<ion-card *ngFor="let reunion of reuniones">
+      <div style="margin-bottom: 15px;">
+        <label style="font-size: 14px; color: #aaa; display: block; margin-bottom: 5px;">Asignatura / Materia:</label>
+        <input type="text" [(ngModel)]="nuevoNombreClase" placeholder="Ej: Inteligencia Artificial" style="width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #444; color: white; border-radius: 6px;">
+      </div>
 
-<ion-card-header>
+      <button (click)="agregarSesion()" style="width: 100%; background: #ffc409; color: #000; border: none; padding: 12px; font-weight: bold; border-radius: 6px; cursor: pointer;">
+        AGENDAR CLASE
+      </button>
+    </div>
 
-<ion-card-title>
-{{ reunion.fecha }}
-</ion-card-title>
+    <!-- Lista dinámicas de sesiones -->
+    <h2 style="font-size: 20px; margin-bottom: 15px;">Próximas Sesiones</h2>
 
-</ion-card-header>
+    <div *ngIf="sesiones.length === 0" style="text-align: center; color: #777; padding: 20px;">
+      No hay sesiones programadas. ¡Agrega una arriba!
+    </div>
 
-<ion-card-content>
+    <div *ngFor="let sesion of sesiones; let i = index" style="background: #1e1e1e; padding: 15px 20px; border-radius: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #ffc409;">
+      <div>
+        <h4 style="margin: 0 0 5px 0; color: #ffc409; font-size: 16px;">{{ sesion.fecha }}</h4>
+        <p style="margin: 0; color: #ddd; font-size: 14px;">{{ sesion.nombreClase }}</p>
+      </div>
+      <button (click)="eliminarSesion(i)" style="background: #eb445a; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;">
+        Eliminar
+      </button>
+    </div>
 
-{{ reunion.materia }}
-
-</ion-card-content>
-
-</ion-card>
+  </div>
 
 </ion-content>

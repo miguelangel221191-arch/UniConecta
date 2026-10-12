@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>UniConecta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
+
+  <h1>Bienvenido</h1>
+  <p>Organiza tus grupos de estudio en un solo lugar.</p>
+
+  <!-- Botones de Gestion General -->
+  <ion-button expand="block" color="primary" routerLink="/tabs/groups" class="ion-margin-bottom">
+    MIS GRUPOS
+  </ion-button>
+  
+  <ion-button expand="block" color="success" routerLink="/chat" class="ion-margin-bottom">
+    CHAT
+  </ion-button>
+  
+  <ion-button expand="block" color="warning" routerLink="/calendario" class="ion-margin-bottom">
+    CALENDARIO
+  </ion-button>
+  
+  <ion-button expand="block" color="medium" routerLink="/tabs/profile" class="ion-margin-bottom">
+    PERFIL
+  </ion-button>
+
+  <h3 style="margin-top: 30px;">Tecnologías Móviles</h3>
+
+  <!-- Modulos de Hardware y Sensores -->
+  <ion-button expand="block" color="warning" routerLink="/wifi" class="ion-margin-bottom">
+    ESTADO DE RED / WIFI
+  </ion-button>
+  
+  <ion-button expand="block" color="primary" routerLink="/bluetooth" class="ion-margin-bottom">
+    BLUETOOTH
+  </ion-button>
+  
+  <ion-button expand="block" color="danger" routerLink="/nfc" class="ion-margin-bottom">
+    NFC
+  </ion-button>
+  
+  <ion-button expand="block" color="tertiary" routerLink="/tabs/map" class="ion-margin-bottom">
+    GPS / MAPA
+  </ion-button>
+
+  <!-- Modulos Académicos Avanzados -->
+  <ion-button expand="block" color="secondary" routerLink="/noticias" class="ion-margin-bottom">
+    NOTICIAS (API REST)
+  </ion-button>
+
+  <ion-button expand="block" color="warning" routerLink="/podcasts" class="ion-margin-bottom">
+    PODCASTS / MULTIMEDIA (U7)
+  </ion-button>
+
+  <ion-button expand="block" color="success" routerLink="/camara" class="ion-margin-bottom">
+    CÁMARA / QR (U8)
+  </ion-button>
+
+</ion-content>

@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="--background: #1e1e1e; --color: white;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="Atrás" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color: white;">Cámara y Escáner QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #121212; color: white;">
+
+  <div style="margin-top: 10px; margin-bottom: 20px;">
+    <h2>Módulo de Captura y Códigos</h2>
+    <p style="color: #aaa;">Usa la cámara del dispositivo para fotos institucionales y escaneo QR.</p>
+  </div>
+
+  <!-- Sección de Cámara / Fotos -->
+  <ion-card style="background: #1e1e1e; color: white; border-radius: 12px; padding: 15px; margin-bottom: 25px;">
+    <ion-card-header>
+      <ion-card-title style="color: #ffffff; font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 10px;">
+        <ion-icon name="camera" style="color: #3880ff;"></ion-icon>
+        Captura de Imagen
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngIf="!imagenCapturada" style="text-align: center; padding: 30px; border: 2px dashed #333; border-radius: 8px; margin-bottom: 15px;">
+        <ion-icon name="image-outline" style="font-size: 48px; color: #555;"></ion-icon>
+        <p style="color: #aaa; margin-top: 10px;">No hay ninguna foto capturada.</p>
+      </div>
+
+      <div *ngIf="imagenCapturada" style="text-align: center; margin-bottom: 15px;">
+        <img [src]="imagenCapturada" alt="Foto capturada" style="max-height: 200px; border-radius: 8px; border: 2px solid #3880ff;" />
+      </div>
+
+      <ion-button expand="block" color="primary" (click)="tomarFoto()">
+        <ion-icon name="camera" slot="start"></ion-icon>
+        Abrir Cámara / Tomar Foto
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección de Escáner QR -->
+  <ion-card style="background: #1e1e1e; color: white; border-radius: 12px; padding: 15px; margin-bottom: 25px;">
+    <ion-card-header>
+      <ion-card-title style="color: #ffffff; font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 10px;">
+        <ion-icon name="qr-code" style="color: #2dd36f;"></ion-icon>
+        Escáner de Código QR
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div style="background: #121212; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
+        <p style="color: #888; font-size: 12px; margin-bottom: 5px;">RESULTADO DEL ESCANEO:</p>
+        <p style="color: #2dd36f; font-weight: bold; font-size: 15px; word-break: break-all;">
+          {{ modoEscaneo ? 'Escaneando código QR...' : resultadoQR }}
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <ion-button expand="block" color="success" style="flex: 1;" (click)="escanearQR()" [disabled]="modoEscaneo">
+          <ion-icon name="qr-code" slot="start"></ion-icon>
+          Escanear QR
+        </ion-button>
+
+        <ion-button expand="block" color="medium" fill="outline" (click)="limpiarTodo()">
+          <ion-icon name="refresh"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
